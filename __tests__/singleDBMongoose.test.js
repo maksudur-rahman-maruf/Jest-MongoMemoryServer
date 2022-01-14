@@ -8,7 +8,7 @@ describe('Single MongoMemoryServer', () => {
 
     beforeAll(async () => {
         mongoServer = await MongoMemoryServer.create();
-        con = await mongoose.connect(mongoServer.getUri(), { dbName: "verifyMASTER" }); 
+        con = await mongoose.connect(mongoServer.getUri(), { dbName: "verifyMASTER" });
         // con = await mongoose.connect('mongodb://127.0.0.1:27017', { dbName: "verifyMASTER" });  
         console.log(mongoServer.getUri());
 
@@ -25,26 +25,35 @@ describe('Single MongoMemoryServer', () => {
 
     it('should successfully set & get information from the database', async () => {
 
-        const schema = new mongoose.Schema(
-            {
-                name: {
-                    type: String,
-                    required: true,
-                    unique: true,
-                },
-                text: {
-                    type: String,
-                    required: true,
-                },
-            }
-        );
-        const Model = mongoose.model('Test', schema);
 
-        const doc = new Model({
+        const Note = require('../note.js').Note;
+        const note = new Note({
             name: "My Mongo Memory Server Name",
             text: "My Mongo Memory Server Text"
         });
-        await doc.save();
+        await note.save();
+
+        // const schema = new mongoose.Schema(
+        //     {
+        //         name: {
+        //             type: String,
+        //             required: true,
+        //             unique: true,
+        //         },
+        //         text: {
+        //             type: String,
+        //             required: true,
+        //         },
+        //     }
+        // );
+        // const Model = mongoose.model('Test', schema);
+
+        // const doc = new Model({
+        //     name: "My Mongo Memory Server Name",
+        //     text: "My Mongo Memory Server Text"
+        // });
+        // await doc.save();
+
 
         // console.log(con);
         const db = con.connections[0].db;
