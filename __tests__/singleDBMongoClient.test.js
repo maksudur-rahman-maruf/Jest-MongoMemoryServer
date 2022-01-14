@@ -10,7 +10,7 @@ describe('Single MongoMemoryServer', () => {
         mongoServer = await MongoMemoryServer.create();
         con = await MongoClient.connect(mongoServer.getUri(), {});  //{ dbName: "verifyMASTER" }
         //  con = await MongoClient.connect('mongodb://127.0.0.1:27017', {});  //{ dbName: "verifyMASTER" }
-        console.log(mongoServer.getUri());
+        // console.log(mongoServer.getUri());
     });
 
     afterAll(async () => {

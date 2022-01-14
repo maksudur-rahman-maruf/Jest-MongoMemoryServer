@@ -18,7 +18,7 @@ app.post('/notes', (req, res) => {
         name: body.name,
         text: body.text
     });
-    note.save(note)
+    note.save()
         .then((note) => res.status(201).send(note))
         .catch((err) => res.status(400).send(err));
 });
